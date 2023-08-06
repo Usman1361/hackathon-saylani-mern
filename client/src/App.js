@@ -3,7 +3,6 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import PrivateComponents from "./components/PrivateComponents";
 import { useEffect } from "react";
-import Todo from "./pages/Todo";
 import Dashboard from "./pages/Dashboard";
 function App() {
   const Navigate = useNavigate();

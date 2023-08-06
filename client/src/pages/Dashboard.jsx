@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar/NavBar";
-import TodoPortion from "../components/TodoPortion/TodoPortion";
 import { Box } from "@mui/material";
 import Loading from "../components/SmallComponents/Loading";
 

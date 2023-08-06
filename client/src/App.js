@@ -18,13 +18,14 @@ function App() {
   return (
     <>
       {/* <BrowserRouter> */}
-      <Header />
+
       <Routes>
         <Route element={<PrivateComponents />}>
           <Route
             path="/"
             element={
               <>
+                <Header />
                 <Dashboard />
               </>
             }
@@ -51,6 +52,7 @@ function App() {
           path="/Cart"
           element={
             <>
+              <Header />
               <Cart />
             </>
           }
@@ -59,6 +61,7 @@ function App() {
           path="/order"
           element={
             <>
+              <Header />
               <Orders />
             </>
           }

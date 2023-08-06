@@ -20,28 +20,16 @@ import { url } from "../../utils";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const Navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
-  // Function to handle incrementing the quantity of an item
-  const handleIncrement = (index) => {
-    setCartItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      updatedItems[index].quantity += 1;
-      return updatedItems;
-    });
-  };
+  const [orderitem, setOrderItem] = useState([]);
 
-  // Function to handle decrementing the quantity of an item
-  const handleDecrement = (index) => {
-    setCartItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      if (updatedItems[index].quantity > 1) {
-        updatedItems[index].quantity -= 1;
-      }
-      return updatedItems;
-    });
-  };
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [Quantity, setQuantity] = useState(1);
+
   useEffect(() => {
     const id = localStorage.getItem("cart");
     axios
@@ -56,6 +44,14 @@ const Cart = () => {
         console.error("Error fetching products:", error);
       });
   }, []);
+  const [userid, setUserId] = useState();
+  const [productid, setProductId] = useState();
+  const handleOrder = () => {
+    console.log("order clicked");
+    setUserId(localStorage.getItem("userId"));
+    setProductId(localStorage.getItem("cart"));
+    
+  };
   return (
     <Box sx={{ backgroundColor: "#121120" }}>
       <Container maxWidth="xl">
@@ -128,8 +124,10 @@ const Cart = () => {
                       <TableCell align="right" sx={{ color: "white" }}>
                         <TextField
                           type="number"
+                          value={Quantity}
                           variant="outlined"
                           size="small"
+                          onChange={(e) => setQuantity(e.target.value)}
                           sx={{ color: "white", backgroundColor: "white" }}
                         />
                       </TableCell>
@@ -143,10 +141,23 @@ const Cart = () => {
             </TableContainer>
           </Grid>
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            {/* Shipping Address Input */}
+            <TextField
+              label="Shipping Address"
+              variant="filled"
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+              sx={{ backgroundColor: "white", width: "100%" }}
+              multiline
+              rows={4}
+            />
+          </Grid>
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               variant="contained"
               color="primary"
               sx={{ marginBottom: "10px" }}
+              onClick={handleOrder}
             >
               OrderNow
             </Button>

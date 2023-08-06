@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-
+import mongoose from "mongoose";
 const orderSchema = new Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,

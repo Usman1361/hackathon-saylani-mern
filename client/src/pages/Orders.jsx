@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Orders = () => {
-  return (
-    <div>
-      Order Here
-    </div>
-  )
-}
+  return <>Active Orders should be displayed here</>;
+};
 
-export default Orders
+export default Orders;

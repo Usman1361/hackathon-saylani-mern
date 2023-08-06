@@ -6,6 +6,7 @@ let productSchema = new Schema(
     description: String,
     images: Array,
     price: Number,
+    
     totalQuantity: { type: Number, minlength: 0 },
     visibility: {
       type: Boolean,

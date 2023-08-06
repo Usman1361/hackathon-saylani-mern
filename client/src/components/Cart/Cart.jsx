@@ -1,5 +1,12 @@
 import React from "react";
-import { Grid, Box, Container, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Container,
+  Typography,
+  Button,
+  TextField,
+} from "@mui/material";
 import Products from "../Products/Products";
 import { product2 } from "../SmallComponents/image";
 import Table from "@mui/material/Table";
@@ -9,26 +16,46 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-const cartItems = [
-  { id: 1, name: "Product 1", price: 10 },
-  { id: 2, name: "Product 2", price: 20 },
-];
+import { url } from "../../utils";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Cart = () => {
-  const rows = [
-    {
-      name: "Product1",
-      details: "kmfdmkf",
-      quantity: "1",
-      price: 60,
-    },
-    {
-      name: "Product4",
-      details: "kmfdmkf",
-      quantity: "3",
-      price: 80,
-    },
-  ];
+  const [cartItems, setCartItems] = useState([]);
+  // Function to handle incrementing the quantity of an item
+  const handleIncrement = (index) => {
+    setCartItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      updatedItems[index].quantity += 1;
+      return updatedItems;
+    });
+  };
+
+  // Function to handle decrementing the quantity of an item
+  const handleDecrement = (index) => {
+    setCartItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      if (updatedItems[index].quantity > 1) {
+        updatedItems[index].quantity -= 1;
+      }
+      return updatedItems;
+    });
+  };
+  useEffect(() => {
+    const id = localStorage.getItem("cart");
+    axios
+      .get(`${url}/product/${id}`)
+      .then((response) => {
+        // setProducts(response.data);
+        console.log(response.data);
+        setCartItems(response.data);
+        // console.log(product.images[0]);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
   return (
     <Box sx={{ backgroundColor: "#121120" }}>
       <Container maxWidth="xl">
@@ -56,6 +83,7 @@ const Cart = () => {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
+                    <TableCell sx={{ color: "white" }}>Image</TableCell>
                     <TableCell sx={{ color: "white" }}>Title</TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
                       Details
@@ -69,7 +97,7 @@ const Cart = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows?.map(({ name, details, price, quantity }) => (
+                  {cartItems?.map(({ name, description, price, images }) => (
                     <TableRow
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
@@ -80,16 +108,33 @@ const Cart = () => {
                         scope="row"
                         sx={{ color: "white" }}
                       >
+                        <img
+                          src={`${url}/${images[0]}`}
+                          alt=""
+                          width={100}
+                          hight={100}
+                        />
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        sx={{ color: "white" }}
+                      >
                         {name}
                       </TableCell>
                       <TableCell align="right" sx={{ color: "white" }}>
-                        {details}
+                        {description}
+                      </TableCell>
+                      <TableCell align="right" sx={{ color: "white" }}>
+                        <TextField
+                          type="number"
+                          variant="outlined"
+                          size="small"
+                          sx={{ color: "white", backgroundColor: "white" }}
+                        />
                       </TableCell>
                       <TableCell align="right" sx={{ color: "white" }}>
                         {price}
-                      </TableCell>
-                      <TableCell align="right" sx={{ color: "white" }}>
-                        {quantity}
                       </TableCell>
                     </TableRow>
                   ))}

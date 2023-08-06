@@ -2,10 +2,24 @@ import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { product1 } from "../SmallComponents/image";
 import Products from "../Products/Products";
+import { url } from "../../utils.js";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 const ProductsSection = () => {
-  useEffect(() => ,{
-    
-  } []);
+  const [product, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${url}/product`)
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data);
+        console.log(product.images[0]);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
   return (
     <Box sx={{ backgroundColor: "#121120" }}>
       <Container maxWidth="xl">
@@ -20,7 +34,7 @@ const ProductsSection = () => {
               </Typography>
             </Box>
           </Grid>
-          {[1, 2, 3, 4, 5, 6].map(() => (
+          {product.map(({ name, price, description, images, _id }) => (
             <Grid
               mt={10}
               item
@@ -30,9 +44,11 @@ const ProductsSection = () => {
             >
               <Box mr={2}>
                 <Products
-                  img={product1}
-                  text="Sample"
-                  detail="uhfhofhjsehhshlkstkhl jiasjkjlr ijpafjifs"
+                  img={`${url}/${images[0]}`}
+                  text={name}
+                  detail={description}
+                  id={_id}
+                  price={price}
                 />
               </Box>
             </Grid>

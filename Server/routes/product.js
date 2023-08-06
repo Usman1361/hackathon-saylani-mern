@@ -11,6 +11,14 @@ productRouter.get("/product", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+productRouter.get("/product/:_id", async (req, res) => {
+  try {
+    const products = await product.find({ _id: req.params._id });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 productRouter.post("/product", upload.array("file"), async (req, res) => {
   try {

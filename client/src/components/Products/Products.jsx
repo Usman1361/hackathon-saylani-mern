@@ -2,6 +2,11 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 
 const Products = (props) => {
+  const handleCart = (id) => {
+    console.log(`Add to cart clicked of ${id}`);
+    localStorage.setItem("cart", id);
+  };
+
   return (
     <Box
       height={400}
@@ -36,6 +41,12 @@ const Products = (props) => {
         >
           {props.detail}
         </Typography>
+        <Typography
+          sx={{ textAlign: "center", color: "green" }}
+          variant="body2"
+        >
+          {props.price}
+        </Typography>
         <Box mt={2} sx={{ display: "flex", justifyContent: "center" }}>
           <Button
             sx={{ marginRight: "10px" }}
@@ -44,7 +55,11 @@ const Products = (props) => {
           >
             View More
           </Button>
-          <Button variant="contained" color="success">
+          <Button
+            variant="contained"
+            color="success"
+            onClick={(e) => handleCart(props.id)}
+          >
             Add to Cart
           </Button>
         </Box>

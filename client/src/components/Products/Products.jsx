@@ -5,11 +5,11 @@ const Products = (props) => {
   return (
     <Box
       height={400}
-      width={400}
+      width={350}
       sx={{ border: "2px solid #795548", borderRadius: "8px" }}
     >
       <Box
-      mt={4}
+        mt={4}
         sx={{
           display: "flex",
           justifyContent: "center",

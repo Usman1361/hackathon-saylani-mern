@@ -12,7 +12,6 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <Header />
       <ProductsSection />
     </>
   );

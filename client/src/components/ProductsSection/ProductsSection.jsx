@@ -3,9 +3,12 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { product1 } from "../SmallComponents/image";
 import Products from "../Products/Products";
 const ProductsSection = () => {
+  useEffect(() => ,{
+    
+  } []);
   return (
-    <Box>
-      <Container>
+    <Box sx={{ backgroundColor: "#121120" }}>
+      <Container maxWidth="xl">
         <Grid container>
           <Grid item xs={12}>
             <Box>
@@ -22,14 +25,14 @@ const ProductsSection = () => {
               mt={10}
               item
               xs={12}
-              md={6}
+              md={4}
               sx={{ display: "flex", flexDirection: "center" }}
             >
               <Box mr={2}>
                 <Products
                   img={product1}
                   text="Sample"
-                  detail="uhfhofhjsehhshlkhlkstkhl jiasjkjlr ijpafjifs"
+                  detail="uhfhofhjsehhshlkstkhl jiasjkjlr ijpafjifs"
                 />
               </Box>
             </Grid>

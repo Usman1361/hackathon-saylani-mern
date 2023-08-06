@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { logo } from "./components/SmallComponents/image";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import InstagramIcon from "@mui/icons-material/Instagram";
 // import { Link } from "react-router-dom";
 
@@ -52,7 +52,40 @@ function Header(props) {
                 justifyContent: "center",
               }}
             >
-              <ListItemText sx={{ color: "#F5F5F5" }} primary={item} />
+              {i === 0 && (
+                <Link
+                  to="/"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <ListItemText primary={item} />
+                </Link>
+              )}
+              {i === 1 && (
+                <Link
+                  to="/Cart"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <ListItemText primary={item} />
+                </Link>
+              )}
+              {i === 2 && (
+                <Link
+                  to="/order"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <ListItemText primary={item} />
+                </Link>
+              )}
+              {/* <ListItemText sx={{ color: "#F5F5F5" }} primary={item} /> */}
             </ListItemButton>
           </ListItem>
         ))}
@@ -87,9 +120,32 @@ function Header(props) {
               <img src={logo} width={80} height={60} alt="logo" />
             </Box>
             <Box sx={{ display: { xs: "none", md: "block" } }}>
-              {navItems.map((item) => (
+              {navItems.map((item, i) => (
                 <Button key={item} sx={{ color: "#F5F5F5", mx: 2 }}>
-                  {item}
+                  {i === 0 && (
+                    <Link
+                      to="/"
+                      style={{ textDecoration: "none", color: "White" }}
+                    >
+                      {item}
+                    </Link>
+                  )}
+                  {i === 1 && (
+                    <Link
+                      to="/cart"
+                      style={{ textDecoration: "none", color: "White" }}
+                    >
+                      {item}
+                    </Link>
+                  )}
+                  {i === 2 && (
+                    <Link
+                      to="/order"
+                      style={{ textDecoration: "none", color: "White" }}
+                    >
+                      {item}
+                    </Link>
+                  )}
                 </Button>
               ))}
 

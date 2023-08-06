@@ -7,18 +7,6 @@ let productSchema = new Schema(
     images: Array,
     price: Number,
     totalQuantity: { type: Number, minlength: 0 },
-    featured: {
-      type: Boolean,
-      default: false,
-    },
-    unLimitedStock: {
-      type: Boolean,
-      default: false,
-    },
-    published: {
-      type: Boolean,
-      default: false,
-    },
     visibility: {
       type: Boolean,
       default: true,

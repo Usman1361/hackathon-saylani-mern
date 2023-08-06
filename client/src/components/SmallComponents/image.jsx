@@ -1,3 +1,4 @@
 import logo from "../../images/logo.png";
 import product1 from "../../images/product1.webp";
-export { logo, product1 };
+import product2 from "../../images/product2.webp";
+export { logo, product1, product2 };

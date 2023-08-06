@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
-import Loading from "../components/SmallComponents/Loading";
+import Header from "../Header";
+import ProductsSection from "../components/ProductsSection/ProductsSection";
 
 const Dashboard = () => {
   const [loader, setLoader] = useState(false);
@@ -12,8 +12,8 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <Loading loading={loader} />
-      <h1>DashBoard</h1>
+      <Header />
+      <ProductsSection />
     </>
   );
 };

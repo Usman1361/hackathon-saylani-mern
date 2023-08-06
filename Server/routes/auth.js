@@ -58,7 +58,7 @@ authRouter.post("/sign-in", async (req, res) => {
     }
 
     const token = jwt.sign({ _id: found?._id }, JWT_SECRET, {
-      expiresIn: "10m",
+      expiresIn: "1000m",
     });
 
     res.status(200).json({
